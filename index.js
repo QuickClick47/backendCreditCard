@@ -124,7 +124,7 @@ function getOrderRequest(rb) {
           quantity: "1",
           base_price_money: {
             amount: rb.amount,
-            currency: "ILS"
+            currency: "USD"
           }
         }
       ]
