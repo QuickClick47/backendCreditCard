@@ -28,7 +28,7 @@ const ordersApi = new OrdersApi();
 const locationsApi = new LocationsApi();
 const customersApi = new CustomersApi();
 
-app.post('/chargeForCookie', async (request, response) => {
+app.post('/chargeQuickCick', async (request, response) => {
   const requestBody = request.body;
   const createOrderRequest = getOrderRequest();
 
@@ -120,11 +120,11 @@ function getOrderRequest() {
     order: {
       line_items: [
         {
-          name: "Cookie 🍪",
+          name: "KioskOrder",
           quantity: "1",
           base_price_money: {
-            amount: 100,
-            currency: "USD"
+            amount: requestBody.amount,
+            currency: "ILS"
           }
         }
       ]
