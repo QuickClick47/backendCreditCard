@@ -30,7 +30,7 @@ const customersApi = new CustomersApi();
 
 app.post('/chargeQuickCick', async (request, response) => {
   const requestBody = request.body;
-  const createOrderRequest = getOrderRequest();
+  const createOrderRequest = getOrderRequest(requestBody);
 
   try {
     const locations = await locationsApi.listLocations();
@@ -63,7 +63,7 @@ app.post('/chargeQuickCick', async (request, response) => {
 
 app.post('/chargeCustomerCard', async (request, response) => {
   const requestBody = request.body;
-  const createOrderRequest = getOrderRequest();
+  const createOrderRequest = getOrderRequest(requestBody);
 
   try {
     const locations = await locationsApi.listLocations();
@@ -114,7 +114,7 @@ app.post('/createCustomerCard', async (request, response) => {
   }
 });
 
-function getOrderRequest() {
+function getOrderRequest(rb) {
   return {
     idempotency_key: crypto.randomBytes(12).toString('hex'),
     order: {
@@ -123,7 +123,7 @@ function getOrderRequest() {
           name: "KioskOrder",
           quantity: "1",
           base_price_money: {
-            amount: requestBody.amount,
+            amount: rb.amount,
             currency: "ILS"
           }
         }
